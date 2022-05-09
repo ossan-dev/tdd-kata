@@ -21,3 +21,11 @@ func TestAdd_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
 
 	assert.Equal(t, 1, got)
 }
+
+func TestAdd_ShouldReturnThree_WhenOneTwoIsPassed(t *testing.T) {
+	inputNumbers := "1,2"
+
+	got := Add(inputNumbers)
+
+	assert.Equal(t, 3, got)
+}
