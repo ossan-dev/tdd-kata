@@ -1,11 +1,9 @@
 package main
 
-func FizzBuzz(input int) string {
-	if input == 1 {
-		return "1"
-	}
+import "strconv"
 
-	return "2"
+func FizzBuzz(input int) string {
+	return strconv.Itoa(input)
 }
 
 func main() {
