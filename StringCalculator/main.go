@@ -19,7 +19,7 @@ func Add(numbers string) (int, error) {
 	delimiter := ","
 	for _, line := range strings.Split(numbers, "\n") {
 		if line[0] == '/' {
-			delimiter = string(line[2])
+			delimiter = string(line[2:])
 			continue
 		}
 		if _, err := strconv.Atoi(string(line[len(line)-1])); err != nil {

@@ -70,3 +70,30 @@ func TestAdd_ShouldReturnFour_WhenOneThreeWithSemicolonArePassed(t *testing.T) {
 	assert.Equal(t, 4, got)
 	assert.Nil(t, err)
 }
+
+func TestAdd_ShouldReturnSix_WhenOneTwoThreeWithPipeArePassed(t *testing.T) {
+	inputNumbers := "//|\n1|2|3"
+
+	got, err := Add(inputNumbers)
+
+	assert.Equal(t, 6, got)
+	assert.Nil(t, err)
+}
+
+func TestAdd_ShouldReturnSeven_WhenTwoFiveWithSepArePassed(t *testing.T) {
+	inputNumbers := "//sep\n2sep5"
+
+	got, err := Add(inputNumbers)
+
+	assert.Equal(t, 7, got)
+	assert.Nil(t, err)
+}
+
+func TestAdd_ShouldReturnErr_WhenWrongSeparatorIsPassed(t *testing.T) {
+	inputNumbers := "//|\n1|2,3"
+
+	_, err := Add(inputNumbers)
+
+	assert.NotNil(t, err)
+	assert.Equal(t, "'|' expected but ',' found at position 3.", err.Error())
+}
