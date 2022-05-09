@@ -1,6 +1,9 @@
 package main
 
-import "strconv"
+import (
+	"strconv"
+	"strings"
+)
 
 func Add(numbers string) int {
 	if len(numbers) == 0 {
@@ -10,7 +13,11 @@ func Add(numbers string) int {
 		numToReturn, _ := strconv.Atoi(numbers)
 		return numToReturn
 	}
-	return 0
+	num1Str := strings.Split(numbers, ",")[0]
+	num2Str := strings.Split(numbers, ",")[1]
+	num1, _ := strconv.Atoi(num1Str)
+	num2, _ := strconv.Atoi(num2Str)
+	return num1 + num2
 }
 
 func main() {
