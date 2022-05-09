@@ -61,3 +61,12 @@ func TestAdd_ShouldReturnErr_WhenTwoColonNewLineThreeArePassed(t *testing.T) {
 
 	assert.NotNil(t, err)
 }
+
+func TestAdd_ShouldReturnFour_WhenOneThreeWithSemicolonArePassed(t *testing.T) {
+	inputNumbers := "//;\n1;3"
+
+	got, err := Add(inputNumbers)
+
+	assert.Equal(t, 4, got)
+	assert.Nil(t, err)
+}
