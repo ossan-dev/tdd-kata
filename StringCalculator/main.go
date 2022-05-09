@@ -16,11 +16,16 @@ func Add(numbers string) (int, error) {
 	}
 
 	sum := 0
+	delimiter := ","
 	for _, line := range strings.Split(numbers, "\n") {
+		if line[0] == '/' {
+			delimiter = string(line[2])
+			continue
+		}
 		if _, err := strconv.Atoi(string(line[len(line)-1])); err != nil {
 			return 0, fmt.Errorf("the line %q terminates with an unallowed character", line)
 		}
-		for _, number := range strings.Split(line, ",") {
+		for _, number := range strings.Split(line, delimiter) {
 			numberToAdd, _ := strconv.Atoi(number)
 			sum += numberToAdd
 		}
