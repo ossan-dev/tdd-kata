@@ -5,3 +5,6 @@ Simple repo to solve Test Driven Development Katas with Go.
 Each folder contains a single-standalone kata exercise.  
 You can follow the development flow by navigating the git history of the files. Each commit should be consistent with a single TDD phase.  
 At this [link](https://tddmanifesto.com/exercises/) you can see the text of the exercises implemented.
+
+## Katas
+1. FizzBuzz: WIP
