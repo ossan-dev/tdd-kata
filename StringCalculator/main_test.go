@@ -53,3 +53,11 @@ func TestAdd_ShouldReturnErr_WhenTwoCommaNewLineThreeArePassed(t *testing.T) {
 
 	assert.NotNil(t, err)
 }
+
+func TestAdd_ShouldReturnErr_WhenTwoColonNewLineThreeArePassed(t *testing.T) {
+	inputNumbers := "2:\n3"
+
+	_, err := Add(inputNumbers)
+
+	assert.NotNil(t, err)
+}
