@@ -16,3 +16,14 @@ func TestFizzBuzz_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
 	// assert
 	assert.Equal(t, got, "1")
 }
+
+func TestFizzBuzz_ShouldReturnTwo_WhenTwoIsPassed(t *testing.T) {
+	// arrange
+	intArg := 2
+
+	// act
+	got := FizzBuzz(intArg)
+
+	// assert
+	assert.Equal(t, got, "2")
+}
