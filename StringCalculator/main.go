@@ -15,9 +15,11 @@ func Add(numbers string) int {
 	}
 
 	sum := 0
-	for _, number := range strings.Split(numbers, ",") {
-		numberToAdd, _ := strconv.Atoi(number)
-		sum += numberToAdd
+	for _, line := range strings.Split(numbers, "\n") {
+		for _, number := range strings.Split(line, ",") {
+			numberToAdd, _ := strconv.Atoi(number)
+			sum += numberToAdd
+		}
 	}
 	return sum
 }
