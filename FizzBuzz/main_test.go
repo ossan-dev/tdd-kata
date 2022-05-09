@@ -6,57 +6,44 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestFizzBuzz_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
-	// arrange
-	intArg := 1
+func TestFizzBuzz(t *testing.T) {
+	testSuite := []struct {
+		name     string
+		inputArg int
+		expected string
+	}{
+		{
+			name:     "ShouldReturnOne_WhenOneIsPassed",
+			inputArg: 1,
+			expected: "1",
+		},
+		{
+			name:     "ShouldReturnTwo_WhenTwoIsPassed",
+			inputArg: 2,
+			expected: "2",
+		},
+		{
+			name:     "ShouldReturnFizz_WhenSixIsPassed",
+			inputArg: 6,
+			expected: "Fizz",
+		},
+		{
+			name:     "ShouldReturnBuzz_WhenTenIsPassed",
+			inputArg: 10,
+			expected: "Buzz",
+		},
+		{
+			name:     "ShouldReturnFizzBuzz_WhenFifteenIsPassed",
+			inputArg: 15,
+			expected: "FizzBuzz",
+		},
+	}
 
-	// act
-	got := FizzBuzz(intArg)
+	for _, tt := range testSuite {
+		t.Run(tt.name, func(t *testing.T) {
+			got := FizzBuzz(tt.inputArg)
 
-	// assert
-	assert.Equal(t, "1", got)
-}
-
-func TestFizzBuzz_ShouldReturnTwo_WhenTwoIsPassed(t *testing.T) {
-	// arrange
-	intArg := 2
-
-	// act
-	got := FizzBuzz(intArg)
-
-	// assert
-	assert.Equal(t, "2", got)
-}
-
-func TestFizzBuzz_ShouldReturnFizz_WhenSixIsPassed(t *testing.T) {
-	// arrange
-	intArg := 6
-
-	// act
-	got := FizzBuzz(intArg)
-
-	// assert
-	assert.Equal(t, "Fizz", got)
-}
-
-func TestFizzBuzz_ShouldReturnBuzz_WhenTenIsPassed(t *testing.T) {
-	// arrange
-	intArg := 10
-
-	// act
-	got := FizzBuzz(intArg)
-
-	// assert
-	assert.Equal(t, "Buzz", got)
-}
-
-func TestFizzBuzz_ShouldReturnFizzBuzz_WhenFifteenIsPassed(t *testing.T) {
-	// arrange
-	intArg := 15
-
-	// act
-	got := FizzBuzz(intArg)
-
-	// assert
-	assert.Equal(t, "FizzBuzz", got)
+			assert.Equal(t, tt.expected, got)
+		})
+	}
 }
