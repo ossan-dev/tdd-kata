@@ -7,4 +7,5 @@ You can follow the development flow by navigating the git history of the files. 
 At this [link](https://tddmanifesto.com/exercises/) you can see the text of the exercises implemented.
 
 ## Katas
-1. FizzBuzz: WIP
+1. FizzBuzz: **Completed**
+1. StringCalculator: WIP
