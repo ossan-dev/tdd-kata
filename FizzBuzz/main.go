@@ -1,7 +1,11 @@
 package main
 
 func FizzBuzz(input int) string {
-	return "1"
+	if input == 1 {
+		return "1"
+	}
+
+	return "2"
 }
 
 func main() {
