@@ -49,3 +49,14 @@ func TestFizzBuzz_ShouldReturnBuzz_WhenTenIsPassed(t *testing.T) {
 	// assert
 	assert.Equal(t, "Buzz", got)
 }
+
+func TestFizzBuzz_ShouldReturnFizzBuzz_WhenFifteenIsPassed(t *testing.T) {
+	// arrange
+	intArg := 15
+
+	// act
+	got := FizzBuzz(intArg)
+
+	// assert
+	assert.Equal(t, "FizzBuzz", got)
+}
