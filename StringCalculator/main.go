@@ -13,23 +13,13 @@ func Add(numbers string) int {
 		numToReturn, _ := strconv.Atoi(numbers)
 		return numToReturn
 	}
-	if len(numbers) == 3 {
-		num1Str := strings.Split(numbers, ",")[0]
-		num2Str := strings.Split(numbers, ",")[1]
-		num2, _ := strconv.Atoi(num2Str)
-		num1, _ := strconv.Atoi(num1Str)
-		return num1 + num2
-	}
 
-	num1Str := strings.Split(numbers, ",")[0]
-	num2Str := strings.Split(numbers, ",")[1]
-	num3Str := strings.Split(numbers, ",")[2]
-	num4Str := strings.Split(numbers, ",")[3]
-	num1, _ := strconv.Atoi(num1Str)
-	num2, _ := strconv.Atoi(num2Str)
-	num3, _ := strconv.Atoi(num3Str)
-	num4, _ := strconv.Atoi(num4Str)
-	return num1 + num2 + num3 + num4
+	sum := 0
+	for _, number := range strings.Split(numbers, ",") {
+		numberToAdd, _ := strconv.Atoi(number)
+		sum += numberToAdd
+	}
+	return sum
 }
 
 func main() {
