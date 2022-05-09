@@ -37,3 +37,11 @@ func TestAdd_ShouldReturnTen_WhenOneTwoThreeFourArePassed(t *testing.T) {
 
 	assert.Equal(t, 10, got)
 }
+
+func TestAdd_ShouldReturnSix_WhenOneTwoNewLineThreeArePassed(t *testing.T) {
+	inputNumbers := "1,2\n3"
+
+	got := Add(inputNumbers)
+
+	assert.Equal(t, 6, got)
+}
