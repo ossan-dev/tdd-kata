@@ -14,7 +14,7 @@ func TestFizzBuzz_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
 	got := FizzBuzz(intArg)
 
 	// assert
-	assert.Equal(t, got, "1")
+	assert.Equal(t, "1", got)
 }
 
 func TestFizzBuzz_ShouldReturnTwo_WhenTwoIsPassed(t *testing.T) {
@@ -25,5 +25,16 @@ func TestFizzBuzz_ShouldReturnTwo_WhenTwoIsPassed(t *testing.T) {
 	got := FizzBuzz(intArg)
 
 	// assert
-	assert.Equal(t, got, "2")
+	assert.Equal(t, "2", got)
+}
+
+func TestFizzBuzz_ShouldReturnFizz_WhenSixIsPassed(t *testing.T) {
+	// arrange
+	intArg := 6
+
+	// act
+	got := FizzBuzz(intArg)
+
+	// assert
+	assert.Equal(t, "Fizz", got)
 }
