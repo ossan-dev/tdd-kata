@@ -9,7 +9,7 @@ import (
 func TestAdd_ShouldReturnZero_WhenStringEmptyIsPassed(t *testing.T) {
 	inputNumbers := ""
 
-	got := Add(inputNumbers)
+	got, _ := Add(inputNumbers)
 
 	assert.Equal(t, 0, got)
 }
@@ -17,7 +17,7 @@ func TestAdd_ShouldReturnZero_WhenStringEmptyIsPassed(t *testing.T) {
 func TestAdd_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
 	inputNumbers := "1"
 
-	got := Add(inputNumbers)
+	got, _ := Add(inputNumbers)
 
 	assert.Equal(t, 1, got)
 }
@@ -25,7 +25,7 @@ func TestAdd_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
 func TestAdd_ShouldReturnFour_WhenTwoTwoArePassed(t *testing.T) {
 	inputNumbers := "2,2"
 
-	got := Add(inputNumbers)
+	got, _ := Add(inputNumbers)
 
 	assert.Equal(t, 4, got)
 }
@@ -33,7 +33,7 @@ func TestAdd_ShouldReturnFour_WhenTwoTwoArePassed(t *testing.T) {
 func TestAdd_ShouldReturnTen_WhenOneTwoThreeFourArePassed(t *testing.T) {
 	inputNumbers := "1,2,3,4"
 
-	got := Add(inputNumbers)
+	got, _ := Add(inputNumbers)
 
 	assert.Equal(t, 10, got)
 }
@@ -41,7 +41,7 @@ func TestAdd_ShouldReturnTen_WhenOneTwoThreeFourArePassed(t *testing.T) {
 func TestAdd_ShouldReturnSix_WhenOneTwoNewLineThreeArePassed(t *testing.T) {
 	inputNumbers := "1,2\n3"
 
-	got := Add(inputNumbers)
+	got, _ := Add(inputNumbers)
 
 	assert.Equal(t, 6, got)
 }
@@ -49,8 +49,7 @@ func TestAdd_ShouldReturnSix_WhenOneTwoNewLineThreeArePassed(t *testing.T) {
 func TestAdd_ShouldReturnErr_WhenTwoCommaNewLineThreeArePassed(t *testing.T) {
 	inputNumbers := "2,\n3"
 
-	got, err := Add(inputNumbers)
+	_, err := Add(inputNumbers)
 
-	assert.Nil(t, got)
 	assert.NotNil(t, err)
 }
