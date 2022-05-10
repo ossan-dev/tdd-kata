@@ -12,5 +12,5 @@ func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
 	got, err := Validate(pass)
 
 	assert.Equal(t, false, got)
-	assert.Equal(t, "Password must be at least 8 characters", err.Error())
+	assert.Equal(t, "password must be at least 8 characters", err.Error())
 }
