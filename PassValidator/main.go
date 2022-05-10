@@ -2,8 +2,8 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"regexp"
+	"strings"
 )
 
 const (
@@ -12,16 +12,20 @@ const (
 )
 
 func Validate(pass string) (bool, error) {
+	validationErr := []string{}
+
+	if len(pass) < 8 {
+		validationErr = append(validationErr, TOO_SHORT)
+	}
+
 	r, _ := regexp.Compile(`[\d]`)
 	numOfDigits := len(r.FindAllString(pass, -1))
-	if len(pass) < 8 && numOfDigits < 2 {
-		return false, fmt.Errorf("%v\n%v", TOO_SHORT, TOO_FEW_DIGITS)
-	}
 	if numOfDigits < 2 {
-		return false, errors.New(TOO_FEW_DIGITS)
+		validationErr = append(validationErr, TOO_FEW_DIGITS)
 	}
-	if len(pass) < 8 {
-		return false, errors.New(TOO_SHORT)
+
+	if len(validationErr) > 0 {
+		return false, errors.New(strings.Join(validationErr, "\n"))
 	}
 	return true, nil
 }
