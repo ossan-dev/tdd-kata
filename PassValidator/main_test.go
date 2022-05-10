@@ -33,3 +33,12 @@ func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumber
 	assert.Equal(t, false, got)
 	assert.Equal(t, fmt.Sprintf("%v\n%v", TOO_SHORT, TOO_FEW_DIGITS), err.Error())
 }
+
+func TestValidate_ShouldGetErr_WhenNoCapitalLetterIsPresent(t *testing.T) {
+	pass := "aa3ab2cd"
+
+	got, err := Validate(pass)
+
+	assert.Equal(t, false, got)
+	assert.Equal(t, "password must contain at least one capital letter", err.Error())
+}

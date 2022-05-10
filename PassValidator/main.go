@@ -4,6 +4,7 @@ import (
 	"errors"
 	"regexp"
 	"strings"
+	"unicode"
 )
 
 const (
@@ -27,6 +28,17 @@ func Validate(pass string) (bool, error) {
 	if len(validationErr) > 0 {
 		return false, errors.New(strings.Join(validationErr, "\n"))
 	}
+
+	numOfCapitalLetters := 0
+	for _, v := range pass {
+		if unicode.IsUpper(v) {
+			numOfCapitalLetters++
+		}
+	}
+	if numOfCapitalLetters == 0 {
+		return false, errors.New("password must contain at least one capital letter")
+	}
+
 	return true, nil
 }
 
