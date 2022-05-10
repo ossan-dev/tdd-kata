@@ -6,94 +6,107 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestAdd_ShouldReturnZero_WhenStringEmptyIsPassed(t *testing.T) {
-	inputNumbers := ""
+func TestAdd(t *testing.T) {
+	testSuite := []struct {
+		name          string
+		numbers       string
+		resExpected   int
+		isErrExpected bool
+		errMessage    string
+	}{
+		{
+			"ShouldReturnZero_WhenStringEmptyIsPassed",
+			"",
+			0,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnOne_WhenOneIsPassed",
+			"1",
+			1,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnFour_WhenTwoTwoArePassed",
+			"2,2",
+			4,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnTen_WhenOneTwoThreeFourArePassed",
+			"1,2,3,4",
+			10,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnSix_WhenOneTwoNewLineThreeArePassed",
+			"1,2\n3",
+			6,
+			false,
+			"",
+		},
+		{
+			"WhenTwoCommaNewLineThreeArePassed",
+			"2,\n3",
+			0,
+			true,
+			"",
+		},
+		{
+			"ShouldReturnErr_WhenTwoColonNewLineThreeArePassed",
+			"2:\n3",
+			0,
+			true,
+			"",
+		},
+		{
+			"ShouldReturnFour_WhenOneThreeWithSemicolonArePassed",
+			"//;\n1;3",
+			4,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnSix_WhenOneTwoThreeWithPipeArePassed",
+			"//|\n1|2|3",
+			6,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnSeven_WhenTwoFiveWithSepArePassed",
+			"//sep\n2sep5",
+			7,
+			false,
+			"",
+		},
+		{
+			"ShouldReturnErr_WhenWrongSeparatorIsPassed",
+			"//|\n1|2,3",
+			0,
+			true,
+			"'|' expected but ',' found at position 3",
+		},
+	}
 
-	got, _ := Add(inputNumbers)
+	for _, tt := range testSuite {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Add(tt.numbers)
 
-	assert.Equal(t, 0, got)
-}
+			assert.Equal(t, tt.resExpected, got)
+			if !tt.isErrExpected {
+				assert.Nil(t, err)
+				return
+			}
 
-func TestAdd_ShouldReturnOne_WhenOneIsPassed(t *testing.T) {
-	inputNumbers := "1"
-
-	got, _ := Add(inputNumbers)
-
-	assert.Equal(t, 1, got)
-}
-
-func TestAdd_ShouldReturnFour_WhenTwoTwoArePassed(t *testing.T) {
-	inputNumbers := "2,2"
-
-	got, _ := Add(inputNumbers)
-
-	assert.Equal(t, 4, got)
-}
-
-func TestAdd_ShouldReturnTen_WhenOneTwoThreeFourArePassed(t *testing.T) {
-	inputNumbers := "1,2,3,4"
-
-	got, _ := Add(inputNumbers)
-
-	assert.Equal(t, 10, got)
-}
-
-func TestAdd_ShouldReturnSix_WhenOneTwoNewLineThreeArePassed(t *testing.T) {
-	inputNumbers := "1,2\n3"
-
-	got, _ := Add(inputNumbers)
-
-	assert.Equal(t, 6, got)
-}
-
-func TestAdd_ShouldReturnErr_WhenTwoCommaNewLineThreeArePassed(t *testing.T) {
-	inputNumbers := "2,\n3"
-
-	_, err := Add(inputNumbers)
-
-	assert.NotNil(t, err)
-}
-
-func TestAdd_ShouldReturnErr_WhenTwoColonNewLineThreeArePassed(t *testing.T) {
-	inputNumbers := "2:\n3"
-
-	_, err := Add(inputNumbers)
-
-	assert.NotNil(t, err)
-}
-
-func TestAdd_ShouldReturnFour_WhenOneThreeWithSemicolonArePassed(t *testing.T) {
-	inputNumbers := "//;\n1;3"
-
-	got, err := Add(inputNumbers)
-
-	assert.Equal(t, 4, got)
-	assert.Nil(t, err)
-}
-
-func TestAdd_ShouldReturnSix_WhenOneTwoThreeWithPipeArePassed(t *testing.T) {
-	inputNumbers := "//|\n1|2|3"
-
-	got, err := Add(inputNumbers)
-
-	assert.Equal(t, 6, got)
-	assert.Nil(t, err)
-}
-
-func TestAdd_ShouldReturnSeven_WhenTwoFiveWithSepArePassed(t *testing.T) {
-	inputNumbers := "//sep\n2sep5"
-
-	got, err := Add(inputNumbers)
-
-	assert.Equal(t, 7, got)
-	assert.Nil(t, err)
-}
-
-func TestAdd_ShouldReturnErr_WhenWrongSeparatorIsPassed(t *testing.T) {
-	inputNumbers := "//|\n1|2,3"
-
-	_, err := Add(inputNumbers)
-
-	assert.NotNil(t, err)
-	assert.Equal(t, "'|' expected but ',' found at position 3", err.Error())
+			assert.NotNil(t, err)
+			if tt.errMessage != "" {
+				assert.Equal(t, tt.errMessage, err.Error())
+			}
+		})
+	}
 }
