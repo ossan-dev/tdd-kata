@@ -95,5 +95,5 @@ func TestAdd_ShouldReturnErr_WhenWrongSeparatorIsPassed(t *testing.T) {
 	_, err := Add(inputNumbers)
 
 	assert.NotNil(t, err)
-	assert.Equal(t, "'|' expected but ',' found at position 3.", err.Error())
+	assert.Equal(t, "'|' expected but ',' found at position 3", err.Error())
 }

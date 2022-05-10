@@ -33,14 +33,11 @@ func Add(numbers string) (int, error) {
 			if err != nil {
 				r, _ := regexp.Compile(`[\D]`)
 				charNotAllowed := r.FindString(number)
-				indexOfCharNotAllowed := -1
+				indexOfCharNotAllowed := strings.Index(numbers, charNotAllowed)
 				if delimiterPassed {
-					stringToSearch := numbers[4:]
-					indexOfCharNotAllowed = strings.Index(stringToSearch, charNotAllowed)
-					return 0, fmt.Errorf("'%v' expected but '%v' found at position %d.", delimiter, charNotAllowed, indexOfCharNotAllowed)
+					indexOfCharNotAllowed -= 4
 				}
-				indexOfCharNotAllowed = strings.Index(numbers, charNotAllowed)
-				return 0, fmt.Errorf("'%v' expected but '%v' found at position %d.", delimiter, charNotAllowed, indexOfCharNotAllowed)
+				return 0, fmt.Errorf("'%v' expected but '%v' found at position %d", delimiter, charNotAllowed, indexOfCharNotAllowed)
 			}
 			sum += numberToAdd
 		}
