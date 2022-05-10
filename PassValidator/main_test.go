@@ -42,3 +42,12 @@ func TestValidate_ShouldGetErr_WhenNoCapitalLetterIsPresent(t *testing.T) {
 	assert.Equal(t, false, got)
 	assert.Equal(t, NO_CAPITAL_LETTER, err.Error())
 }
+
+func TestValidate_ShouldGetErr_WhenNoSpecialCharIsPresent(t *testing.T) {
+	pass := "aa3ab2cdA"
+
+	got, err := Validate(pass)
+
+	assert.Equal(t, false, got)
+	assert.Equal(t, "password must contain at least one special character", err.Error())
+}
