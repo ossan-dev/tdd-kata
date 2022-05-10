@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
@@ -22,4 +23,13 @@ func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
 
 	assert.Equal(t, false, got)
 	assert.Equal(t, TOO_FEW_DIGITS, err.Error())
+}
+
+func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumbers(t *testing.T) {
+	pass := "ab2cd"
+
+	got, err := Validate(pass)
+
+	assert.Equal(t, false, got)
+	assert.Equal(t, fmt.Sprintf("%v\n%v", TOO_SHORT, TOO_FEW_DIGITS), err.Error())
 }
