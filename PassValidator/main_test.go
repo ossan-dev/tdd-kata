@@ -8,7 +8,7 @@ import (
 )
 
 func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
-	pass := "134567"
+	pass := "1A4567"
 
 	got, err := Validate(pass)
 
@@ -17,7 +17,7 @@ func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
 }
 
 func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "abcdefgh1"
+	pass := "aBcdefgh1"
 
 	got, err := Validate(pass)
 
@@ -26,7 +26,7 @@ func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
 }
 
 func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "ab2cd"
+	pass := "ab2Cd"
 
 	got, err := Validate(pass)
 
@@ -40,5 +40,5 @@ func TestValidate_ShouldGetErr_WhenNoCapitalLetterIsPresent(t *testing.T) {
 	got, err := Validate(pass)
 
 	assert.Equal(t, false, got)
-	assert.Equal(t, "password must contain at least one capital letter", err.Error())
+	assert.Equal(t, NO_CAPITAL_LETTER, err.Error())
 }
