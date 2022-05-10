@@ -21,5 +21,5 @@ func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
 	got, err := Validate(pass)
 
 	assert.Equal(t, false, got)
-	assert.Equal(t, "the password must contain at least 2 numbers", err.Error())
+	assert.Equal(t, TOO_FEW_DIGITS, err.Error())
 }
