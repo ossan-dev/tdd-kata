@@ -7,55 +7,59 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
-	pass := "1A4.567"
+func TestValidate(t *testing.T) {
+	testSuite := []struct {
+		name     string
+		pass     string
+		expected bool
+		errorMsg string
+	}{
+		{
+			"ShouldGetErr_WhenPassLenIsLessThanEight",
+			"1A4.567",
+			false,
+			TOO_SHORT,
+		},
+		{
+			"ShouldGetErr_WhenNotContainsAtLeastTwoNumbers",
+			"ab\\2Cdaaa",
+			false,
+			TOO_FEW_DIGITS,
+		},
+		{
+			"ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumbers",
+			"ab\\2Cd",
+			false,
+			fmt.Sprintf("%v\n%v", TOO_SHORT, TOO_FEW_DIGITS),
+		},
+		{
+			"ShouldGetErr_WhenNoCapitalLetterIsPresent",
+			"aa3?!ab2cd",
+			false,
+			NO_CAPITAL_LETTER,
+		},
+		{
+			"ShouldGetErr_WhenNoSpecialCharIsPresent",
+			"aa3ab2cdA",
+			false,
+			NO_SPECIAL_CHARS,
+		},
+		{
+			"ShouldGetTrue_WhenPassAreValid",
+			"a&&a3ab2cdA",
+			true,
+			"",
+		},
+	}
 
-	got, err := Validate(pass)
+	for _, tt := range testSuite {
+		t.Run(tt.name, func(t *testing.T) {
+			got, err := Validate(tt.pass)
 
-	assert.Equal(t, false, got)
-	assert.Equal(t, TOO_SHORT, err.Error())
-}
-
-func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "aBcd:efgh1"
-
-	got, err := Validate(pass)
-
-	assert.Equal(t, false, got)
-	assert.Equal(t, TOO_FEW_DIGITS, err.Error())
-}
-
-func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "ab\\2Cd"
-
-	got, err := Validate(pass)
-
-	assert.Equal(t, false, got)
-	assert.Equal(t, fmt.Sprintf("%v\n%v", TOO_SHORT, TOO_FEW_DIGITS), err.Error())
-}
-
-func TestValidate_ShouldGetErr_WhenNoCapitalLetterIsPresent(t *testing.T) {
-	pass := "aa3?!ab2cd"
-
-	got, err := Validate(pass)
-
-	assert.Equal(t, false, got)
-	assert.Equal(t, NO_CAPITAL_LETTER, err.Error())
-}
-
-func TestValidate_ShouldGetErr_WhenNoSpecialCharIsPresent(t *testing.T) {
-	pass := "aa3ab2cdA"
-
-	got, err := Validate(pass)
-
-	assert.Equal(t, false, got)
-	assert.Equal(t, NO_SPECIAL_CHARS, err.Error())
-}
-
-func TestValidate_ShouldGetTrue_WhenPassAreValid(t *testing.T) {
-	pass := "a&&a3ab2cdA"
-
-	got, _ := Validate(pass)
-
-	assert.Equal(t, true, got)
+			assert.Equal(t, tt.expected, got)
+			if tt.errorMsg != "" {
+				assert.Equal(t, tt.errorMsg, err.Error())
+			}
+		})
+	}
 }
