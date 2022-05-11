@@ -4,6 +4,7 @@ import (
 	"errors"
 	"regexp"
 	"strings"
+	"unicode"
 )
 
 const (
@@ -33,6 +34,16 @@ func Validate(pass string) (bool, error) {
 
 	if len(validationErr) > 0 {
 		return false, errors.New(strings.Join(validationErr, "\n"))
+	}
+
+	numOfSpecialChars := 0
+	for _, v := range pass {
+		if !unicode.IsLetter(v) && !unicode.IsDigit(v) {
+			numOfSpecialChars++
+		}
+	}
+	if numOfSpecialChars == 0 {
+		return false, errors.New("password must contain at least one special character")
 	}
 
 	return true, nil
