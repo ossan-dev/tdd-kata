@@ -8,7 +8,7 @@ import (
 )
 
 func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
-	pass := "1A4567"
+	pass := "1A4.567"
 
 	got, err := Validate(pass)
 
@@ -17,7 +17,7 @@ func TestValidate_ShouldGetErr_WhenPassLenIsLessThanEight(t *testing.T) {
 }
 
 func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "aBcdefgh1"
+	pass := "aBcd:efgh1"
 
 	got, err := Validate(pass)
 
@@ -26,7 +26,7 @@ func TestValidate_ShouldGetErr_WhenNotContainsAtLeastTwoNumbers(t *testing.T) {
 }
 
 func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumbers(t *testing.T) {
-	pass := "ab2Cd"
+	pass := "ab\\2Cd"
 
 	got, err := Validate(pass)
 
@@ -35,7 +35,7 @@ func TestValidate_ShouldGetErr_WhenIsLessThanEightAndNotContainsAtLeastTwoNumber
 }
 
 func TestValidate_ShouldGetErr_WhenNoCapitalLetterIsPresent(t *testing.T) {
-	pass := "aa3ab2cd"
+	pass := "aa3?!ab2cd"
 
 	got, err := Validate(pass)
 
@@ -49,5 +49,5 @@ func TestValidate_ShouldGetErr_WhenNoSpecialCharIsPresent(t *testing.T) {
 	got, err := Validate(pass)
 
 	assert.Equal(t, false, got)
-	assert.Equal(t, "password must contain at least one special character", err.Error())
+	assert.Equal(t, NO_SPECIAL_CHARS, err.Error())
 }

@@ -4,13 +4,13 @@ import (
 	"errors"
 	"regexp"
 	"strings"
-	"unicode"
 )
 
 const (
 	TOO_SHORT         = "password must be at least 8 characters"
 	TOO_FEW_DIGITS    = "the password must contain at least 2 numbers"
 	NO_CAPITAL_LETTER = "password must contain at least one capital letter"
+	NO_SPECIAL_CHARS  = "password must contain at least one special character"
 )
 
 func Validate(pass string) (bool, error) {
@@ -32,18 +32,14 @@ func Validate(pass string) (bool, error) {
 		validationErr = append(validationErr, NO_CAPITAL_LETTER)
 	}
 
-	if len(validationErr) > 0 {
-		return false, errors.New(strings.Join(validationErr, "\n"))
+	r, _ = regexp.Compile(`[^A-Za-z0-9]`)
+	numOfSpecialChars := len(r.FindAllString(pass, -1))
+	if numOfSpecialChars == 0 {
+		validationErr = append(validationErr, NO_SPECIAL_CHARS)
 	}
 
-	numOfSpecialChars := 0
-	for _, v := range pass {
-		if !unicode.IsLetter(v) && !unicode.IsDigit(v) {
-			numOfSpecialChars++
-		}
-	}
-	if numOfSpecialChars == 0 {
-		return false, errors.New("password must contain at least one special character")
+	if len(validationErr) > 0 {
+		return false, errors.New(strings.Join(validationErr, "\n"))
 	}
 
 	return true, nil
