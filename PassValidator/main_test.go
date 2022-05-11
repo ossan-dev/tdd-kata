@@ -51,3 +51,11 @@ func TestValidate_ShouldGetErr_WhenNoSpecialCharIsPresent(t *testing.T) {
 	assert.Equal(t, false, got)
 	assert.Equal(t, NO_SPECIAL_CHARS, err.Error())
 }
+
+func TestValidate_ShouldGetTrue_WhenPassAreValid(t *testing.T) {
+	pass := "a&&a3ab2cdA"
+
+	got, _ := Validate(pass)
+
+	assert.Equal(t, true, got)
+}
