@@ -32,6 +32,11 @@ func TestSearchCity(t *testing.T) {
 			input:                  "aPe",
 			cities_to_be_in_result: []string{"Budapest"},
 		},
+		{
+			name:                   "MustReturnAllCities_WhenInputCharIsAsterisk",
+			input:                  "*",
+			cities_to_be_in_result: cities,
+		},
 	}
 	for _, tt := range test_suite {
 		t.Run(tt.name, func(t *testing.T) {
