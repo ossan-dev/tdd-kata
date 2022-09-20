@@ -9,4 +9,6 @@ At this [link](https://tddmanifesto.com/exercises/) you can see the text of the 
 ## Katas
 1. FizzBuzz: **Completed**
 1. StringCalculator: **Completed**
-1. PasswordValidation: WIP
+1. PasswordValidation: **Completed**
+1. SearchCity: **Completed**
+1. POS: WIP
