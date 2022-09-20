@@ -9,7 +9,7 @@ func SearchCity(input string) (result []string) {
 		return
 	}
 	for _, v := range cities {
-		if strings.HasPrefix(v, input) {
+		if strings.HasPrefix(strings.ToLower(v), strings.ToLower(input)) {
 			result = append(result, v)
 		}
 	}
