@@ -22,6 +22,11 @@ func TestSearchCity(t *testing.T) {
 			input:                  "Va",
 			cities_to_be_in_result: []string{"Valencia", "Vancouver"},
 		},
+		{
+			name:                   "MustReturnCitiesStartingWithTheInput_WhenInputIsLongerThanTwoCharsAndIsNotInTheCorrectCase",
+			input:                  "VA",
+			cities_to_be_in_result: []string{"Valencia", "Vancouver"},
+		},
 	}
 	for _, tt := range test_suite {
 		t.Run(tt.name, func(t *testing.T) {
