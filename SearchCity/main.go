@@ -10,7 +10,7 @@ func SearchCity(input string) (result []string) {
 	}
 	input = strings.ToLower(input)
 	for _, v := range cities {
-		if strings.HasPrefix(strings.ToLower(v), input) {
+		if strings.Contains(strings.ToLower(v), input) {
 			result = append(result, v)
 		}
 	}
