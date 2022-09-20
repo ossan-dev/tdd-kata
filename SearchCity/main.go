@@ -8,8 +8,9 @@ func SearchCity(input string) (result []string) {
 	if len(input) < 2 {
 		return
 	}
+	input = strings.ToLower(input)
 	for _, v := range cities {
-		if strings.HasPrefix(strings.ToLower(v), strings.ToLower(input)) {
+		if strings.HasPrefix(strings.ToLower(v), input) {
 			result = append(result, v)
 		}
 	}
