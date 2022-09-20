@@ -28,7 +28,7 @@ func TestSearchCity(t *testing.T) {
 			cities_to_be_in_result: []string{"Valencia", "Vancouver"},
 		},
 		{
-			name:                   "MustReturnCities_WhenInputCharsAreInTheMiddleOfACity",
+			name:                   "MustReturnCities_WhenInputCharsAreInTheMiddle",
 			input:                  "aPe",
 			cities_to_be_in_result: []string{"Budapest"},
 		},
