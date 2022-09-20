@@ -10,5 +10,5 @@ func SearchCity(input string) (result []string) {
 			result = append(result, v)
 		}
 	}
-	return []string{input}
+	return result
 }
