@@ -18,14 +18,19 @@ func TestSearchCity(t *testing.T) {
 			cities_to_be_in_result: []string{},
 		},
 		{
-			name:                   "MustReturnCitiesStartingWithTheInput_WhenInputIsLongerThanTwoChars",
+			name:                   "MustReturnCities_WhenInputIsLongerThanTwoChars",
 			input:                  "Va",
 			cities_to_be_in_result: []string{"Valencia", "Vancouver"},
 		},
 		{
-			name:                   "MustReturnCitiesStartingWithTheInput_WhenInputIsLongerThanTwoCharsAndIsNotInTheCorrectCase",
+			name:                   "MustReturnCities_WhenInputCharsAreNotInTheCorrectCase",
 			input:                  "VA",
 			cities_to_be_in_result: []string{"Valencia", "Vancouver"},
+		},
+		{
+			name:                   "MustReturnCities_WhenInputCharsAreInTheMiddleOfACity",
+			input:                  "aPe",
+			cities_to_be_in_result: []string{"Budapest"},
 		},
 	}
 	for _, tt := range test_suite {
