@@ -10,6 +10,9 @@ var products = map[string]float64{
 }
 
 func Scan(barcode string) (price string, err error) {
+	if barcode == "" {
+		return fmt.Sprintf("$%.2f", 0.0), fmt.Errorf("error: empty barcode")
+	}
 	if price, found := products[barcode]; found {
 		return fmt.Sprintf("$%.2f", price), nil
 	}
