@@ -1,8 +1,13 @@
 package pointofsale
 
+import "fmt"
+
+var products = map[string]float64{
+	"12345": 7.25,
+	"23456": 12.5,
+}
+
 func Scan(barcode string) string {
-	if barcode == "12345" {
-		return "$7.25"
-	}
-	return "$12.50"
+	price, _ := products[barcode]
+	return fmt.Sprintf("$%.2f", price)
 }
