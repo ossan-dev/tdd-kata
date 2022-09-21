@@ -1,5 +1,8 @@
 package pointofsale
 
 func Scan(barcode string) string {
-	return "$7.25"
+	if barcode == "12345" {
+		return "$7.25"
+	}
+	return "$12.50"
 }
