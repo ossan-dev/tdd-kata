@@ -36,7 +36,7 @@ func TestScan(t *testing.T) {
 			name:   "MustReturnEmptyBarcode_WhenInputIsBlank",
 			input:  "",
 			output: "$0.00",
-			err:    fmt.Errorf("error: empty barcode"),
+			err:    fmt.Errorf("error: %v", ErrBarcodeEmpty),
 		},
 	}
 	for _, tt := range test_suite {
