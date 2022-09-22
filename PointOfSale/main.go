@@ -12,10 +12,12 @@ var products = map[string]float64{
 	"23456": 12.5,
 }
 
-type ShoppingCart struct{}
+type ShoppingCart struct {
+	total float64
+}
 
 func (s *ShoppingCart) GetTotal() string {
-	return "$7.25"
+	return fmt.Sprintf("$%.2f", s.total)
 }
 
 func NewShoppingCart(starting_total float64) *ShoppingCart {
@@ -27,6 +29,7 @@ func (s *ShoppingCart) Scan(barcode string) (price string, err error) {
 		return fmt.Sprintf("$%.2f", 0.0), fmt.Errorf("error: %v", ErrBarcodeEmpty)
 	}
 	if price, found := products[barcode]; found {
+		s.total += price
 		return fmt.Sprintf("$%.2f", price), nil
 	}
 	return fmt.Sprintf("$%.2f", 0.0), fmt.Errorf("error: %v", ErrBarcodeNotFound)
