@@ -60,3 +60,9 @@ func TestGetTotal(t *testing.T) {
 	got := shopping_cart.GetTotal()
 	assert.Equal(t, "$7.25", got)
 }
+
+func TestNewShoppingCart_NegativeStartValue(t *testing.T) {
+	shopping_cart, err := NewShoppingCart(-12.50)
+	assert.Nil(t, shopping_cart)
+	assert.EqualError(t, err, "error: total of shopping cart cannot be less than zero")
+}
