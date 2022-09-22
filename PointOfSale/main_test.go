@@ -62,7 +62,7 @@ func TestGetTotal_ReturnStartValueWithoutAnyScans(t *testing.T) {
 }
 
 func TestNewShoppingCart_NegativeStartValue(t *testing.T) {
-	shopping_cart, err := NewShoppingCart(-12.50)
-	assert.Nil(t, shopping_cart)
+	got, err := NewShoppingCart(-12.50)
+	assert.Nil(t, got)
 	assert.EqualError(t, err, fmt.Sprintf("error: %v", ErrNegativeAmount))
 }
