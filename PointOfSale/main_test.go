@@ -54,15 +54,15 @@ func TestScan(t *testing.T) {
 	}
 }
 
-func TestGetTotal(t *testing.T) {
-	shopping_cart, _ := NewShoppingCart(0.0)
-	shopping_cart.Scan("12345")
+func TestGetTotal_ReturnStartValueWithoutAnyScans(t *testing.T) {
+	start_amount := 8.50
+	shopping_cart, _ := NewShoppingCart(start_amount)
 	got := shopping_cart.GetTotal()
-	assert.Equal(t, "$7.25", got)
+	assert.Equal(t, fmt.Sprintf("$%.2f", start_amount), got)
 }
 
 func TestNewShoppingCart_NegativeStartValue(t *testing.T) {
 	shopping_cart, err := NewShoppingCart(-12.50)
 	assert.Nil(t, shopping_cart)
-	assert.EqualError(t, err, "error: total of shopping cart cannot be less than zero")
+	assert.EqualError(t, err, fmt.Sprintf("error: %v", ErrNegativeAmount))
 }
