@@ -20,8 +20,11 @@ func (s *ShoppingCart) GetTotal() string {
 	return fmt.Sprintf("$%.2f", s.total)
 }
 
-func NewShoppingCart(starting_total float64) *ShoppingCart {
-	return &ShoppingCart{}
+func NewShoppingCart(starting_total float64) (*ShoppingCart, error) {
+	if starting_total < 0.00 {
+		return nil, fmt.Errorf("error: total of shopping cart cannot be less than zero")
+	}
+	return &ShoppingCart{}, nil
 }
 
 func (s *ShoppingCart) Scan(barcode string) (price string, err error) {

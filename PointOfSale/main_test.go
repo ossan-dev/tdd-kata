@@ -41,7 +41,7 @@ func TestScan(t *testing.T) {
 	}
 	for _, tt := range test_suite {
 		t.Run(tt.name, func(t *testing.T) {
-			shopping_cart := NewShoppingCart(0.00)
+			shopping_cart, _ := NewShoppingCart(0.00)
 			got, err := shopping_cart.Scan(tt.input)
 			if tt.err != nil {
 				assert.Equal(t, "$0.00", got)
@@ -55,7 +55,7 @@ func TestScan(t *testing.T) {
 }
 
 func TestGetTotal(t *testing.T) {
-	shopping_cart := NewShoppingCart(0.0)
+	shopping_cart, _ := NewShoppingCart(0.0)
 	shopping_cart.Scan("12345")
 	got := shopping_cart.GetTotal()
 	assert.Equal(t, "$7.25", got)
