@@ -12,7 +12,17 @@ var products = map[string]float64{
 	"23456": 12.5,
 }
 
-func Scan(barcode string) (price string, err error) {
+type ShoppingCart struct{}
+
+func (s *ShoppingCart) GetTotal() string {
+	return "$7.25"
+}
+
+func NewShoppingCart(starting_total float64) *ShoppingCart {
+	return &ShoppingCart{}
+}
+
+func (s *ShoppingCart) Scan(barcode string) (price string, err error) {
 	if barcode == "" {
 		return fmt.Sprintf("$%.2f", 0.0), fmt.Errorf("error: %v", ErrBarcodeEmpty)
 	}

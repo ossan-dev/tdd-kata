@@ -41,7 +41,8 @@ func TestScan(t *testing.T) {
 	}
 	for _, tt := range test_suite {
 		t.Run(tt.name, func(t *testing.T) {
-			got, err := Scan(tt.input)
+			shopping_cart := NewShoppingCart(0.00)
+			got, err := shopping_cart.Scan(tt.input)
 			if tt.err != nil {
 				assert.Equal(t, "$0.00", got)
 				assert.EqualError(t, err, tt.err.Error())
