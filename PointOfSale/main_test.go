@@ -52,3 +52,10 @@ func TestScan(t *testing.T) {
 		})
 	}
 }
+
+func TestGetTotal(t *testing.T) {
+	shopping_cart := NewShoppingCart(0.0)
+	shopping_cart.Scan("12345")
+	got := shopping_cart.GetTotal()
+	assert.Equal(t, "$7.25", got)
+}
